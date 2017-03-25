@@ -18,14 +18,9 @@
         	[VAZIO,VAZIO,VAZIO]
         ];
 
-    	var pontuacaoXLinha = 0;
-		var pontuacaoXColuna = 0;
-		var pontuacaoXDiagonal = 0;
-
-
-		var pontuacaoOLinha = 0;
-		var pontuacaoOColuna = 0;
-		var pontuacaoODiagonal = 0;
+    	
+		
+		
 		
 		var vencedorX = false;
 		var vencedorO = false;
@@ -37,6 +32,7 @@
 			if(tabuleiro[linha][coluna]===VAZIO){
 
 				tabuleiro[linha][coluna] = jogadorAtual;
+
 				desenharTabuleiro();
 				verificarVencedor();
 				proximoJogador();
@@ -61,15 +57,15 @@
 
 				verificarSomaDiagonalPrincipal();
 
-				if(vencedorX===false && vencedorO===false){
+				if(!vencedorX && !vencedorO){
 					verificarSomaDiagonalSecundaria();
 				}
 
-				if(vencedorX===false && vencedorO===false){
+				if(!vencedorX && !vencedorO){
 					verificarSomaColuna();
 	        	}
 
-				if(vencedorX===false && vencedorO===false){
+				if(!vencedorX && !vencedorO){
 	        		verificarSomaLinha();
         		}
 
@@ -87,6 +83,10 @@
 
 		var verificarSomaLinha = function(){
 
+			var pontuacaoXLinha = 0;
+			var pontuacaoOLinha = 0;
+
+
 	   		for (var linha=0; linha<3;linha++){
     			for(var coluna=0; coluna<3;coluna++){
     					
@@ -95,10 +95,11 @@
         				 
 					}else if(tabuleiro[coluna][linha].simbolo==='O'){
 						pontuacaoOLinha++
-					}
-    			
+					}    			
 
 				}
+
+
     			if(pontuacaoXLinha===3){
 					vencedorX = true;
 					break;
@@ -114,6 +115,9 @@
 		}
 
 		var verificarSomaColuna = function(){
+
+			var pontuacaoXColuna = 0;
+			var pontuacaoOColuna = 0;
 
 			for (var linha=0; linha<3;linha++){
     			for(var coluna=0; coluna<3;coluna++){
@@ -133,16 +137,19 @@
 					vencedorO = true;
 					break;
 				}
+			pontuacaoXColuna=0;
+			pontuacaoOColuna = 0; 
+			}
 
-				pontuacaoXColuna=0;
-				pontuacaoOColuna = 0;
-
-    		}
+				   		
 
 		}
 
 
 		var verificarSomaDiagonalPrincipal = function(){
+
+			var pontuacaoXDiagonal = 0;				
+			var pontuacaoODiagonal = 0;
 			
 			for (var linha=0; linha<3;linha++){        		    
 
@@ -167,10 +174,11 @@
 
 
 		var verificarSomaDiagonalSecundaria = function(){
-			var coluna = 2; 
-			pontuacaoXDiagonal = 0;
-			pontuacaoODiagonal=0;
 
+			var pontuacaoXDiagonal = 0;				
+			var pontuacaoODiagonal = 0;
+			var coluna = 2; 
+			
 			for (var linha=0; linha<3;linha++){        			    
 
 				if(tabuleiro[linha][coluna].simbolo==='X'){
