@@ -24,7 +24,7 @@
 		
 		var vencedorX = false;
 		var vencedorO = false;
-
+		var qtdJogadas = 0;
 
 		var jogadorAtual = jogadorX;
 
@@ -51,10 +51,9 @@
 				}
 		}
 
-		var verificarVencedor = function(){
+		var verificarVencedor = function(){			
 
-			
-
+				qtdJogadas++;
 				verificarSomaDiagonalPrincipal();
 
 				if(!vencedorX && !vencedorO){
@@ -74,10 +73,11 @@
 					
 
         		}else if(vencedorO){
-        			alert('Jogador O venceu o jogo');
-        			
+        			alert('Jogador O venceu o jogo');	
         			
         		}
+
+        		verificarEmpate();
 			
 		}
 
@@ -202,6 +202,15 @@
 
 		}
 
+		var verificarEmpate = function(){			
+
+			if(qtdJogadas>8 && !vencedorO && !vencedorX){				
+
+				alert('Houve um empate');	
+			}
+
+		}
+		
 		
 
 		var mostrarGanhador = function(ganhador){
@@ -216,17 +225,53 @@
         	button.onclick = function(){
 				fazerJogada(linha,coluna);
         	}
+        	
         	document.body.appendChild(button);
 
 		}
 
 
-		var limparTela = function(){
+		var limparTela = function(){		
+
 			document.body.innerHTML="";
+
+			
+
+
 		}
+
+		var criarBotaoLimpar = function(){
+
+			novaLinha();
+			var button = document.createElement("button");
+			button.textContent="Limpar";
+			button.onclick = function(){
+
+				window.location.reload();
+			}
+			
+			document.body.appendChild(button);
+
+		}
+
+		var criarBotaoIniciarJogo = function(){
+
+			var button = document.createElement("button");
+			button.textContent="IniciarJogo";
+			button.onclick = function(){
+
+				desenharTabuleiro();
+			}
+			
+			document.body.appendChild(button);			
+
+		}
+
+
 
 		var desenharTabuleiro = function(){
 			limparTela();
+			
         	for (var linha=0; linha<3;linha++){
         		for(var coluna=0; coluna<3;coluna++){
         			
@@ -235,6 +280,8 @@
         		
         		novaLinha();
         	}
+
+        	criarBotaoLimpar();
 
         }
         
@@ -246,9 +293,9 @@
         </script>
         <TITLE>Jogo da Velha</TITLE>
     </head>
-    <body onload="desenharTabuleiro()">
+     	 <body onload="criarBotaoIniciarJogo()">
 
-    
+		
 
     </body>
 </html>
